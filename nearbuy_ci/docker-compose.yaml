@@ -9,11 +9,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
     volumes:
-      - ./nearbuy_db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+      - ../nearbuy_db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
       - pgdata:/var/lib/postgresql/data
 
   server:
-    build: ./nearbuy_server
+    build: ../nearbuy_server
     env_file:
       - ./.env
     environment:
@@ -21,20 +21,19 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ./nearbuy_server/src:/app/src
+      - ../nearbuy_server/src:/app/src
     depends_on:
       - postgres
 
   vue:
-    build: ./nearbuy_vue
-    env_file:
-      - ./nearbuy_vue/.env
+    build: ../nearbuy_vue
     environment:
+        # VITE_PORT is taken from server env_file
       - port=${VITE_PORT}
     ports:
       - ${VITE_PORT}:${VITE_PORT}
     volumes:
-      - ./nearbuy_vue/src:/app/src
+      - ../nearbuy_vue/src:/app/src
     depends_on:
       - server
 
