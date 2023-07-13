@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
     volumes:
-      - ../nearbuy_db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+      - ./postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
       - pgdata:/var/lib/postgresql/data
 
   server:
