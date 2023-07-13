@@ -21,7 +21,7 @@ class App {
   }
 
   private middlewares() {
-    this.express.use(cors());
+    this.express.use(cors({ origin: 'http://localhost:3000', credentials: true }));
     this.express.use(express.json());
     this.express.use(cookieParser());
   }

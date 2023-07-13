@@ -1,5 +1,7 @@
 `````
 $ cd nearbuy_ci
-$ chmod +x init.sh
-$ ./init.sh
+$ chmod +x start.sh stop.sh
+$ ./start.sh
+
+$ ./stop.sh
 `````

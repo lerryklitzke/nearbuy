@@ -14,7 +14,7 @@ fi
 touch .env
 echo -e "$server_env\n$vue_env" > .env
 
-sudo docker-compose up --build -d
+sudo docker-compose up --build
 
 # Database backup, if needed
 # while true; do

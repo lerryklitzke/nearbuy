@@ -1,7 +1,7 @@
 <template>
   <v-app-bar flat>
     <v-app-bar-title style="cursor: pointer" @click="goToHome">
-      <v-icon icon="mdi-handshake-outline" />
+      <v-icon icon="mdi-map-marker-circle" color="primary" class="text-h4" />
       NearBuy
     </v-app-bar-title>
     <v-btn @click="goToRegister">Register</v-btn>
