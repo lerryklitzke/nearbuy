@@ -48,7 +48,6 @@ const protectedRoutes = ['Dashboard']
 
 router.beforeEach(async (to, from, next) => {
   if (protectedRoutes.includes(String(to.name))) {
-
     await superagent
       .get('http://localhost:2000/is-authorized')
       .withCredentials()

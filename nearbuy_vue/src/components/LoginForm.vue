@@ -10,10 +10,14 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import superagent from 'superagent';
 
   const email = ref('');
   const password = ref('');
+
+  const router = useRouter();
+  const goToDashboard = () => router.push({ name: 'Dashboard' });
 
   async function submit() {
     if (email.value && password.value.length > 6) {
@@ -25,7 +29,7 @@
         .post('http://localhost:2000/login')
         .send(body)
         .withCredentials()
-        .then((res) => console.log(res))
+        .then((res) => goToDashboard())
         .catch(() => console.log('Could not login.'))
     } else {
       console.log('Fill all fields correctly.')

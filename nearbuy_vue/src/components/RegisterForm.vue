@@ -11,11 +11,15 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import superagent from 'superagent';
 
   const email = ref('');
   const password1 = ref('');
   const password2 = ref('');
+
+  const router = useRouter();
+  const goToLogin = () => router.push({ name: 'Login' });
 
   async function submit() {
     if (password1.value === password2.value) {
@@ -27,7 +31,7 @@
         .post('http://localhost:2000/register')
         .send(body)
         .withCredentials()
-        .then((res) => console.log(res))
+        .then((res) => goToLogin())
         .catch(() => console.log('Could not register.'))
     } else {
       console.log('Repeat password doesn\'t match Password.')
