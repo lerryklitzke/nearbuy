@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { ZodObject, ZodError } from 'zod';
 import { userRepository } from '../../repositories';
-import { registerSchema, RegisterType } from '../../validations/register.validation';
+import { registerSchema, RegisterType } from '../../validations';
 
 describe('register validation', () => {
   const testRegister = async (user: RegisterType) => await registerSchema.parseAsync(user);
@@ -14,6 +14,8 @@ describe('register validation', () => {
       await expect(testRegister(user)).rejects.toBeInstanceOf(ZodError);
       await expect(testRegister(user)).rejects.toThrow('This email is already in use');
     })
+
+    vi.restoreAllMocks()
   })
 
   describe('new user', () => {
@@ -42,5 +44,7 @@ describe('register validation', () => {
       await expect(testRegister(user)).rejects.toBeInstanceOf(ZodError);
       await expect(testRegister(user)).rejects.toThrow('This is not a valid email');
     })
+
+    vi.restoreAllMocks();
   })
 })
