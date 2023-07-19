@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { loginSchema, LoginType } from '../middlewares/validations/login.validation';
+import { loginSchema, LoginType } from '../validations';
 import { userRepository } from '../repositories';
 import { User } from '../entity/user.entity';
 

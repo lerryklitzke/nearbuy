@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { userRepository } from '../../repositories';
+import { userRepository } from '../repositories';
 
-const errorMessage = 'Invalid email of password.'
+const errorMessage = 'Invalid email or password.'
 
 export const loginSchema = z.object({
   email: z

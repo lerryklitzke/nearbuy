@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { userRepository } from '../../repositories';
+import { userRepository } from '../repositories';
 
 export const registerSchema = z.object({
   email: z

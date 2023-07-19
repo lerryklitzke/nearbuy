@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { hash } from 'bcrypt';
-import { registerSchema, RegisterType } from '../middlewares/validations/register.validation';
+import { registerSchema, RegisterType } from '../validations';
 import { User } from '../entity/user.entity';
 import { userRepository } from '../repositories';
 
