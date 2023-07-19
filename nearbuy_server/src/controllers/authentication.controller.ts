@@ -5,7 +5,7 @@ import { loginSchema, LoginType } from '../validations';
 import { userRepository } from '../repositories';
 import { User } from '../entity/user.entity';
 
-export const authentication = async (req: Request<{}, {}, LoginType>, res: Response, next: NextFunction): Promise<NextFunction | void> => {
+export const authentication = async (req: Request<{}, {}, LoginType>, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user: LoginType = req.body;
     const { email, password } = await loginSchema.parseAsync(user);  // zod making validation 
