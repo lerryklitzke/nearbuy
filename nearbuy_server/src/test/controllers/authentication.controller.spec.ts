@@ -20,7 +20,7 @@ describe('authentication controller', () => {
   const next = () => {}
   const tokenSigned = new Promise((res, rej) => res('tokenSigned'))
 
-  it('should call res.status with 200 and send', async () => {
+  it('should send a successful response if everything works fine', async () => {
     loginSchema.parseAsync = vi.fn().mockReturnValue(userInRequest);
     userRepository.findOneBy = vi.fn().mockReturnValue(userStored);
     bcrypt.compare = vi.fn().mockResolvedValue(true);
