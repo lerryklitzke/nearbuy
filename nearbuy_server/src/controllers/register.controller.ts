@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { hash } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { registerSchema, RegisterType } from '../validations';
 import { User } from '../entity/user.entity';
 import { userRepository } from '../repositories';
@@ -8,7 +8,7 @@ export const register = async (req: Request<{}, {}, RegisterType>, res: Response
   try {
     const user: RegisterType = req.body;
     const { email, password } = await registerSchema.parseAsync(user);  // zod making validation 
-    const password_hash: string = await hash(password, 12);
+    const password_hash: string = await bcrypt.hash(password, 12);
     const newUser: User = new User();
     newUser.email = email;
     newUser.password_hash = password_hash;
