@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { compare } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { loginSchema, LoginType } from '../validations';
 import { userRepository } from '../repositories';
@@ -12,7 +12,7 @@ export const authentication = async (req: Request<{}, {}, LoginType>, res: Respo
     const userData: User | null = await userRepository.findOneBy({ email });
     if (userData) {
       const { password_hash } = userData;
-      const validPassword: boolean = await compare(password, password_hash);
+      const validPassword: boolean = await bcrypt.compare(password, password_hash);
       if (validPassword) {
         const token = jwt.sign({ email }, process.env.JWT_SECRET);
         res.cookie('authToken', token, { 
