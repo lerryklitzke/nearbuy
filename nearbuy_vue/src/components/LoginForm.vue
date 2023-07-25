@@ -20,7 +20,7 @@
   const goToDashboard = () => router.push({ name: 'Dashboard' });
 
   async function submit() {
-    if (email.value && password.value.length > 6) {
+    if (email.value && password.value.length > 5) {
       const body = {
         email: email.value,
         password: password.value

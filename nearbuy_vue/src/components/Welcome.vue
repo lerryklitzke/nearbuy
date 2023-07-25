@@ -21,7 +21,7 @@
             target="_blank"
             variant="flat"
           >
-            Get started
+            Dashboard
           </v-btn>
         </v-col>
 
