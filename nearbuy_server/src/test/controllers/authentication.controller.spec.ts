@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Request, Response } from 'express';
-import { authentication } from '../../controllers/authentication.controller';
+import { login } from '../../controllers/public/login.controller';
 import { loginSchema } from '../../validations';
 import { userRepository } from '../../repositories';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-describe('authentication controller', () => {
+describe('login controller', () => {
   const userInRequest = { email: 'test@test.com', password: '123456' }
   const userStored = { id: 1, email: userInRequest.email, password_hash: 'thisisthehashpassword' }
   const reqWithUser = {
@@ -28,7 +28,7 @@ describe('authentication controller', () => {
   })
 
   it('should send a successful response if everything works fine', async () => {
-    await authentication(reqWithUser, resWithSpy, next);
+    await login(reqWithUser, resWithSpy, next);
     // expects
     expect(loginSchema.parseAsync).toHaveBeenCalledWith(reqWithUser.body);
     expect(userRepository.findOneBy).toHaveBeenCalledWith({ email: reqWithUser.body.email });
@@ -42,13 +42,13 @@ describe('authentication controller', () => {
 
   it('should throw an error if email is valid but user does not exist', async () => {
     userRepository.findOneBy = vi.fn().mockReturnValue(null);
-    await expect(authentication(reqWithUser, resWithSpy, next)).rejects.toThrow();
+    await expect(login(reqWithUser, resWithSpy, next)).rejects.toThrow();
     vi.resetAllMocks();
   })
 
   it('should throw an error if invalid password', async () => {
     bcrypt.compare = vi.fn().mockResolvedValue(false);
-    await expect(authentication(reqWithUser, resWithSpy, next)).rejects.toThrow();
+    await expect(login(reqWithUser, resWithSpy, next)).rejects.toThrow();
     vi.resetAllMocks();
   })
 })

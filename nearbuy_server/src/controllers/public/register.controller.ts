@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { registerSchema, RegisterType } from '../validations';
-import { User } from '../entity/user.entity';
-import { userRepository } from '../repositories';
+import { registerSchema, RegisterType } from '../../validations';
+import { User } from '../../entity/user.entity';
+import { userRepository } from '../../repositories';
 
 export const register = async (req: Request<{}, {}, RegisterType>, res: Response, next: NextFunction): Promise<void> => {
   try {

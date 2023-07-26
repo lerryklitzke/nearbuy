@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { register } from '../../controllers/register.controller';
+import { register } from '../../controllers/public/register.controller';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { registerSchema } from '../../validations';
