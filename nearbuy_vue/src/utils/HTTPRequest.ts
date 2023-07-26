@@ -14,7 +14,7 @@ interface Request extends RequestWithCredentials {
   body?: Object;
 }
 
-class HTTPRequest {
+export class HTTPRequest {
   public static async get(endpoint: string, options?: RequestWithCredentials) {
     const response = await this.request({ method: 'get', endpoint, ...options });
     return response;

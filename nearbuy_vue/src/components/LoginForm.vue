@@ -10,12 +10,11 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  import HTTPRequest from '@/utils/HTTPRequest';
+  import { useLoginStore } from '@/store/auth/login';
 
-  const router = useRouter();
   const email = ref('');
   const password = ref('');
+  const store = useLoginStore();
 
   async function submit() {
     if (email.value && password.value.length > 5) {
@@ -23,10 +22,7 @@
         email: email.value,
         password: password.value
       }
-      const response = await HTTPRequest.post('/login', { body, withCredentials: true })
-      if (response) {
-        router.push({ name: 'Dashboard' });
-      }
+      await store.login(body);
     } else {
       console.log('Fill all fields correctly.')
     }
